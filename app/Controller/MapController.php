@@ -88,6 +88,12 @@ class MapController extends Controller{
             $dictionaries['relief_type'] = $d_relief_types['value'];
         }
 				$this->set('dictionaries', $dictionaries);
+
+        $d_vegetation_types = $this->Dictionary->getDictionaryValues('vegetation_types');
+        if ($d_vegetation_types['type']=='ok') {
+            $dictionaries['vegetation_type'] = $d_vegetation_types['value'];
+        }
+				$this->set('dictionaries', $dictionaries);
     }
 
     /**
