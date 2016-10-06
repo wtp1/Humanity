@@ -1,0 +1,8 @@
+/*buttons{*/
+.tbutton, .tbuttond{background:#fc0;-moz-box-shadow:0 0 7px rgba(0,0,0,0.2);-webkit-box-shadow:0 0 7px rgba(0,0,0,0.2);box-shadow:0 0 7px rgba(0,0,0,0.2);padding:7px;background-color:white; padding:2px;text-align:center;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;width:80px;float:top;border:solid 1px #ccc}
+.tbutton{cursor:pointer}
+.tbuttond{cursor:default}
+.tbutton:hover{background-color:#F5F5F5;}
+.button{text-align:center;display:block;margin:0px;padding:0px;height:100%;overflow:hidden;font:12px 'Arial';list-style-type:none;color:#FFFFFF;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;color:#474747;border:solid 1px #B6B6B6;padding:5px 9px 5px 9px;background:#E6E6E6;background:-moz-linear-gradient(top,#FFFFFF 1px,#F3F3F3 1px,#E6E6E6);background:-webkit-gradient(linear,0 0,0 100%,color-stop(0.02,#FFFFFF),color-stop(0.02,#F3F3F3),color-stop(1,#E6E6E6));}
+.button:hover{background:#FFFFFF;}
+/*buttons}*/

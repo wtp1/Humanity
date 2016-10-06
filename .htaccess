@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule  ^$ app/webroot/    [L]
+   RewriteRule  (.*) app/webroot/$1 [L]
+</IfModule>
+
+php_value session.gc_maxlifetime 86400
+php_value session.cookie_lifetime 86400
+
