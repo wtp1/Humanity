@@ -31,6 +31,25 @@
         ?>
         <input name = "d_dirt_types" id = "map_tools_dirt_type_value" type = "hidden" class = "map_tools_selected_value" value = "<?php echo $d_dirt_types[0]['d_dirt_types']['id']; ?>" />
     </div>
+
+    <?php // Рельеф ?>
+    <div class = "map_tools_relief_type_container">
+        <?php
+            $map_tools_selected = ' map_tools_selected';
+            foreach ($d_relief_types as $d_relief_type) {
+                ?>
+                <div name = "relief_type"
+                    id = "map_tools_relief_type_<?php echo $d_relief_type['d_relief_types']['id']; ?>"
+                    onclick="map_tools_click(this, 'map_tools_relief_type', <?php echo $d_relief_type['d_relief_types']['id']; ?>)"
+                    class = "map_tools map_tools_relief_type<?php echo $map_tools_selected; ?>">
+                    <img title="<?php echo $d_relief_type['d_relief_types']['name']; ?>" class = "map_tools_img1" src="<?php echo $this->webroot; ?><?php echo $d_relief_type['d_relief_types']['texture_name']; ?>" />
+                </div>
+                <?php
+                $map_tools_selected = '';
+            }
+        ?>
+        <input name = "d_relief_types" id = "map_tools_relief_type_value" type = "hidden" class = "map_tools_selected_value" value = "<?php echo $d_relief_types[0]['d_relief_types']['id']; ?>" />
+    </div>
 </div>
 
 <script>

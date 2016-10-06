@@ -259,7 +259,7 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
        	function(data){
             $("#dialog_tools").dialog({
                 // modal: true,
-                width: 700,
+                width: 400,
             });
             $('#dialog_tools_context').html(data);
         });
