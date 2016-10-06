@@ -37,7 +37,7 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
                             <img hidden class="map_img_hex map_img_hover" src='<?php echo $this->webroot; ?>img/map_editor/brush_1.png'>
                             <img class="map_img_hex map_dirt_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_dirt_types"]["texture_name"]; ?>'>
                             <?php
-                            if ($cell['d_relief_types']['texture_name']<>'') { ?>
+                            if ( ($cell['d_relief_types']['texture_name']<>'') AND ($cell['d_relief_types']['show_on_map']==1) ) { ?>
                                 <img class="map_img_hex map_relief_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_relief_types"]["texture_name"]; ?>'>
                             <?php } ?>
                             <!-- <div class="map_hex-inner-1">
