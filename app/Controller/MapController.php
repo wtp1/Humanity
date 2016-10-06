@@ -89,6 +89,12 @@ class MapController extends Controller{
         }
 				$this->set('dictionaries', $dictionaries);
 
+				$d_water_resources_types = $this->Dictionary->getDictionaryValues('water_resources_types');
+        if ($d_water_resources_types['type']=='ok') {
+            $dictionaries['water_resources_type'] = $d_water_resources_types['value'];
+        }
+				$this->set('dictionaries', $dictionaries);
+
         $d_vegetation_types = $this->Dictionary->getDictionaryValues('vegetation_types');
         if ($d_vegetation_types['type']=='ok') {
             $dictionaries['vegetation_type'] = $d_vegetation_types['value'];
