@@ -80,17 +80,14 @@ class MapController extends Controller{
 
         $d_dirt_types = $this->Dictionary->getDictionaryValues('dirt_types');
         if ($d_dirt_types['type']=='ok') {
-            $this->set('d_dirt_types', $d_dirt_types['value']);
-        } else {
-            $this->set('d_dirt_types', array());
+            $dictionaries['dirt_type'] = $d_dirt_types['value'];
         }
 
         $d_relief_types = $this->Dictionary->getDictionaryValues('relief_types');
         if ($d_relief_types['type']=='ok') {
-            $this->set('d_relief_types', $d_relief_types['value']);
-        } else {
-            $this->set('d_relief_types', array());
+            $dictionaries['relief_type'] = $d_relief_types['value'];
         }
+				$this->set('dictionaries', $dictionaries);
     }
 
     /**
