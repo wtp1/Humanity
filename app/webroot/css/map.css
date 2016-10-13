@@ -14,9 +14,9 @@ body {
     position: relative;
     display: inline-block;
     width: 92px;
-    height: 64px;
+    height: 63px;
     overflow: hidden;
-    margin: 0 -13px;
+    margin: 0 -14px;
 }
 .map_hex img {
     position: relative;
@@ -26,7 +26,7 @@ body {
     height: 64px;
 }
 .map_hex:nth-child(2n) {
-    top: 32px;
+    top: 33px;
 }
 .map_hex-inner-1,
 .map_hex-inner-2 {
