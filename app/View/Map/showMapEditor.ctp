@@ -58,9 +58,11 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
                                 $d_resources_id = $s_cell_resource['d_resources_id'];
                                 $d_resource_groups_id = $resources['resource'][$d_resources_id]['d_resource_groups_id'];
                                 $resource_group_texture_name = $resources['resource_group'][$d_resource_groups_id]['texture_name'];
+                                $resource_value_texture_name = "img/resource_group/resource_value_".$s_cell_resource['value'].".png";
                                 $texture_counter++;
                                 ?>
-                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_img_hex map_resource_group" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$resource_group_texture_name; ?>'>
+                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_hex_img_resource_group1 map_resource_group" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$resource_group_texture_name; ?>'>
+                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_hex_img_resource_group1 map_resource_value" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$resource_value_texture_name; ?>'>
                                 <?php
                             }
                             ?>

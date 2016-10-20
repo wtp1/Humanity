@@ -25,6 +25,19 @@ body {
     width: 184px;
     height: 128px;
 }
+.map_hex_img_resource_group1 {
+    right: -43px;
+}
+.map_resource_group {
+    width: 50px;
+    height: 43px;
+}
+.map_resource_value {
+    height: 45px;
+    width: 28px;
+    left: 36px;
+    right: 0px;
+}
 .map_hex:nth-child(2n) {
     top: 66px;
 }
