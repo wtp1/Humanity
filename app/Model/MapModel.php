@@ -3,61 +3,102 @@ use bayon\core\Model;
 
 class MapModel extends Model{
 
-  /*
-	* Получение всех квадратов для отрисовки карты
-	*/
-	function getSquares()
-	{
-		$query_str =
-		"SELECT * FROM s_squares
-        ORDER BY x_coord, y_coord";
-		$query_result = $this->query($query_str, false);
-		return $query_result;
-	}
+    /*
+  	* Получение всех квадратов для отрисовки карты
+  	*/
+  	function getSquares()
+  	{
+    		$query_str =
+    		"SELECT * FROM s_squares
+            ORDER BY x_coord, y_coord";
+    		$query_result = $this->query($query_str, false);
+    		return $query_result;
+  	}
 
-	/*
-	* Получение ячеек квадрата для отрисовки карты
-	*/
-	function getCells($s_squares_id)
-	{
-		$query_str =
-		"SELECT * FROM s_cells
-		LEFT JOIN d_dirt_types ON s_cells.d_dirt_types_id = d_dirt_types.id
-		LEFT JOIN d_relief_types ON s_cells.d_relief_types_id = d_relief_types.id
-		LEFT JOIN d_vegetation_types ON s_cells.d_vegetation_types_id = d_vegetation_types.id
-		LEFT JOIN d_water_resources_types ON s_cells.d_water_resources_types_id = d_water_resources_types.id
-        WHERE s_cells.s_squares_id = $s_squares_id
-        ORDER BY s_cells.column_number, s_cells.row_number";
-		$query_result = $this->query($query_str, false);
-		return $query_result;
-	}
+  	/*
+  	* Получение ячеек квадрата для отрисовки карты
+  	*/
+  	function getCells($s_squares_id)
+  	{
+    		$query_str =
+    		"SELECT * FROM s_cells
+    		LEFT JOIN d_dirt_types ON s_cells.d_dirt_types_id = d_dirt_types.id
+    		LEFT JOIN d_relief_types ON s_cells.d_relief_types_id = d_relief_types.id
+    		LEFT JOIN d_vegetation_types ON s_cells.d_vegetation_types_id = d_vegetation_types.id
+    		LEFT JOIN d_water_resources_types ON s_cells.d_water_resources_types_id = d_water_resources_types.id
+            WHERE s_cells.s_squares_id = $s_squares_id
+            ORDER BY s_cells.column_number, s_cells.row_number";
+    		$query_result = $this->query($query_str, false);
+    		return $query_result;
+  	}
 
-  /**
-   * Изменение параметров клетки
-   */
-  function changeCellParam($cell_id, $param_name, $param_value)
-  {
-    $query_str =
-    "UPDATE s_cells
-    SET ".$param_name."_id = ".$param_value."
-    WHERE id = ".$cell_id;
-    $this->query($query_str, false);
-  }
+    /**
+     * Изменение параметров клетки
+     */
+    function changeCellParam($cell_id, $param_name, $param_value)
+    {
+        $query_str =
+        "UPDATE s_cells
+        SET ".$param_name."_id = ".$param_value."
+        WHERE id = ".$cell_id;
+        $this->query($query_str, false);
+    }
 
-  /**
-   * Получение параметров клетки
-   */
-  function getCellParam($cell_id)
-  {
-    $query_str =
-    "SELECT * FROM s_cells
-    LEFT JOIN d_dirt_types ON s_cells.d_dirt_types_id = d_dirt_types.id
-    LEFT JOIN d_relief_types ON s_cells.d_relief_types_id = d_relief_types.id
-    LEFT JOIN d_vegetation_types ON s_cells.d_vegetation_types_id = d_vegetation_types.id
-    LEFT JOIN d_water_resources_types ON s_cells.d_water_resources_types_id = d_water_resources_types.id
-    WHERE s_cells.id = ".$cell_id;
-    return $this->query($query_str, false);
-  }
+    /**
+     * Изменение ресурсов клетки
+     */
+    function changeCellResource($cell_id, $resource_id)
+    {
+        $query_str =
+        "SELECT * FROM `s_cell_resources`
+          WHERE `s_cells_id` = $cell_id AND
+          `d_resources_id` = ".$resource_id;
+        $query_result = $this->query($query_str, false);
+
+        if (!empty($query_result)) {
+            $resource_value = $query_result[0]['s_cell_resources']['value'] + 1;
+            if ($resource_value>5) {
+                $resource_value = 0;
+            }
+            $query_str =
+            "UPDATE s_cell_resources
+              SET value = $resource_value
+              WHERE id = ".$query_result[0]['s_cell_resources']['id'];
+        } else {
+            $resource_value = 1;
+            $query_str =
+            "INSERT INTO s_cell_resources
+              (s_cells_id, d_resources_id, value)
+              VALUES ($cell_id, $resource_id, $resource_value)";
+        }
+        $query_result = $this->query($query_str, false);
+    }
+
+    /**
+     * Получение параметров клетки
+     */
+    function getCellParam($cell_id)
+    {
+        $query_str =
+        "SELECT * FROM s_cells
+        LEFT JOIN d_dirt_types ON s_cells.d_dirt_types_id = d_dirt_types.id
+        LEFT JOIN d_relief_types ON s_cells.d_relief_types_id = d_relief_types.id
+        LEFT JOIN d_vegetation_types ON s_cells.d_vegetation_types_id = d_vegetation_types.id
+        LEFT JOIN d_water_resources_types ON s_cells.d_water_resources_types_id = d_water_resources_types.id
+        WHERE s_cells.id = ".$cell_id;
+        return $this->query($query_str, false);
+    }
+
+    /**
+     * Получение ресурсов клетки
+     */
+    function getCellResources($cell_id)
+    {
+        $query_str =
+        "SELECT * FROM s_cell_resources
+        WHERE s_cells_id = $cell_id AND value > 0";
+        return $this->query($query_str, false);
+    }
 
     /*
      * Получение максимальных значений координат квадратов карты

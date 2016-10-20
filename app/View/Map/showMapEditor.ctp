@@ -265,7 +265,7 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
        	function(data){
             $("#dialog_tools").dialog({
                 // modal: true,
-                width: 630,
+                width: 700,
             });
             $('#dialog_tools_context').html(data);
         });
@@ -274,16 +274,14 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
     <?php //Нажатие кистью на ячейку ?>
     function map_tools_use_brush(hex_object_id) {
         var field_list1 = {};
-        $.each($(".map_tools_selected_value"), function(index, object1) {
-            // console.log(object1);
-            // console.log(object1.id);
-            // console.log(object1.name);
-            // console.log(object1.value);
-            field_list1[object1.name] = object1.value;
-        });
-        // console.log(field_list1);
+        if ($("#collapseTwo").attr("aria-expanded")) {
+            field_list1[$("#map_tools_resource_value").attr("name")] = $("#map_tools_resource_value").val();
+        } else {
+            $.each($(".map_tools_selected_value"), function(index, object1) {
+                field_list1[object1.name] = object1.value;
+            });
+        }
         field_list2 = JSON.stringify(field_list1);
-        // console.log(field_list2);
 
         $.each($(".hex_selected"), function(index, object1) {
             save_cell_changes(object1.id, field_list1);
@@ -312,9 +310,6 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
     <?php //Сохранение изменений ?>
     function save_cell_changes(cell__id, field_list1) {
         field_list1 = field_list1 || 'no';
-        // if (field_list1=='no') {
-        //     field_list1 = '';
-        // }
         $.post("<?php echo $this->webroot;?>Map/saveCellParams",{
             cell_id: cell__id,
             field_list: field_list1

@@ -9,3 +9,6 @@
 .ui-dialog {
   position: fixed;
 }
+.nav > li > a {
+    padding: 0;
+}

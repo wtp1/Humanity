@@ -21,6 +21,12 @@ class DictionaryModel extends Model{
             case 'water_resources_types':
                 $table_name = 'd_water_resources_types';
                 break;
+            case 'resource_groups':
+                $table_name = 'd_resource_groups';
+                break;
+            case 'resources':
+                $table_name = 'd_resources';
+                break;
 
             default:
                 $table_name = '';
