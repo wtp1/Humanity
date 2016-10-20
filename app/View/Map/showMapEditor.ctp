@@ -18,6 +18,7 @@
 
 <div class="map">
 <?php
+// pr($resources);
 foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
     ?>
     <div class="map_line map_x_coord_<?php echo $x_coord; ?>" >
@@ -32,6 +33,9 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
                     <?php
                     foreach ($columns['cells'] as $cell) {
                         $cell_id = $cell["s_cells"]["id"];
+                        if($cell_id==7) {
+                            // pr($cell);
+                        }
                         ?>
                         <div onmouseover="hover_hex(<?php echo $cell_id; ?>)" class="map_hex map_square_column_<?php echo $cell['s_cells']['column_number']; ?>" id = "<?php echo $cell_id; ?>" onclick="map_tools_use_brush()">
                             <img hidden class="map_img_hex map_img_hover" src='<?php echo $this->webroot; ?>img/map_editor/brush_1.png'>
@@ -40,16 +44,26 @@ foreach ($squares['x_coord'] as $x_coord => $y_coord_squares_list) {
                             $texture_counter = 0;
                             if ( ($cell['d_relief_types']['texture_name']<>'') AND ($cell['d_relief_types']['show_on_map']==1) ) {
                                 $texture_counter++; ?>
-                                <img style="top: -<?php echo 66*$texture_counter; ?>px;" class="map_img_hex map_relief_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_relief_types"]["texture_name"]; ?>'>
+                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_img_hex map_relief_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_relief_types"]["texture_name"]; ?>'>
                             <?php }
                             if ($cell['d_water_resources_types']['texture_name']<>'') {
                                 $texture_counter++; ?>
-                                <img style="top: -<?php echo 66*$texture_counter; ?>px;" class="map_img_hex map_water_resources_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_water_resources_types"]["texture_name"]; ?>'>
+                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_img_hex map_water_resources_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_water_resources_types"]["texture_name"]; ?>'>
                             <?php }
                             if ($cell['d_vegetation_types']['texture_name']<>'') {
                                 $texture_counter++; ?>
-                                <img style="top: -<?php echo 66*$texture_counter; ?>px;" class="map_img_hex map_vegetation_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_vegetation_types"]["texture_name"]; ?>'>
-                            <?php } ?>
+                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_img_hex map_vegetation_type" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$cell["d_vegetation_types"]["texture_name"]; ?>'>
+                            <?php }
+                            foreach ($cell['s_cell_resources'] as $s_cell_resource) {
+                                $d_resources_id = $s_cell_resource['d_resources_id'];
+                                $d_resource_groups_id = $resources['resource'][$d_resources_id]['d_resource_groups_id'];
+                                $resource_group_texture_name = $resources['resource_group'][$d_resource_groups_id]['texture_name'];
+                                $texture_counter++;
+                                ?>
+                                <img style="top: -<?php echo 128*$texture_counter; ?>px;" class="map_img_hex map_resource_group" title="<?php echo $cell_id; ?>" src='<?php echo $this->webroot.$resource_group_texture_name; ?>'>
+                                <?php
+                            }
+                            ?>
                         </div>
                     <?php
                     }

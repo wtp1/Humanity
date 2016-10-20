@@ -2,31 +2,31 @@ body {
     padding: 10px 30px;
 }
 .map_square {
-    width: 730px;
+    width: 1600px;
     line-height: 15px;
-    margin-right: -28px;
+    margin-right: -205px;
 }
 .map_line {
     margin: -2px;
-    width: 1470px;
+    width: 3300px;
 }
 .map_hex {
     position: relative;
     display: inline-block;
-    width: 92px;
-    height: 63px;
+    width: 184px;
+    height: 128px;
     overflow: hidden;
-    margin: 0 -14px;
+    margin: 0 -24px;
 }
 .map_hex img {
     position: relative;
 }
 .map_img_hex {
-    width: 92px;
-    height: 64px;
+    width: 184px;
+    height: 128px;
 }
 .map_hex:nth-child(2n) {
-    top: 33px;
+    top: 66px;
 }
 .map_hex-inner-1,
 .map_hex-inner-2 {
